@@ -16,4 +16,5 @@
 
 	1. Ensure that Python is installed and up-to-date: http://www.python.org/download/
 	2. Install PYO from the Google Code site: http://code.google.com/p/pyo/downloads/list
-	3. Clone the HeadSpace repository from Github. Instructions: 
+	3. Clone the HeadSpace repository from Github. Instructions: http://help.github.com/fork-a-repo/
+	4. Create a new file in the HeadSpace directory based on the hs-test_template.py file
