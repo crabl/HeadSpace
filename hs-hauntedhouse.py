@@ -17,28 +17,28 @@ s.start()
 ui = HeadSpaceUI("Haunted House")
 
 backgroundWav = SfPlayer("testfiles/horrorbg.wav", loop=True)
-background = HeadSpace(backgroundWav, 0, 0)
+background = HeadSpace(backgroundWav, 0, 0).out()
 ui.add("Background", background)
 
 footstepsWav = SfPlayer("testfiles/footsteps.wav", loop=True)
-footsteps = HeadSpace(footstepsWav, 180, -40)
+footsteps = HeadSpace(footstepsWav, 180, -40).out()
 ui.add("Footsteps", footsteps)
 
 owlsWav = SfPlayer("testfiles/owls.wav", loop=True)
-owls = HeadSpace(owlsWav, -20, 50)
+owls = HeadSpace(owlsWav, -20, 50).out()
 ui.add("Owls", owls)
 
 skitterWav = SfPlayer("testfiles/skitter.wav", loop=True)
-skitter = HeadSpace(skitterWav, 0, 90)
+skitter = HeadSpace(skitterWav, 0, 90).out()
 ui.add("Mice", skitter)
 
 screamWav = SfPlayer("testfiles/scream.wav", loop=True)
-scream = HeadSpace(screamWav, 50, -30)
+scream = HeadSpace(screamWav, 50, -30).out()
 ui.add("Scream", scream)
 
 # Don't add this to the UI... we want to scare the user ;-)
 laughWav = SfPlayer("testfiles/laugh.wav", loop=True)
-laugh = HeadSpace(laughWav, -140, -20)
+laugh = HeadSpace(laughWav, -140, -20).out()
 
 # Show the UI to the user
 ui.show()

@@ -15,7 +15,7 @@ s.start()
 ui = HeadSpaceUI("Barbershop")
 
 shaverWav = SfPlayer("testfiles/shaver.wav", loop=True)
-shaver = HeadSpace(shaverWav, 0, 0)
+shaver = HeadSpace(shaverWav, 0, 0).out()
 ui.add("Shaver", shaver)
 
 backgroundWav = SfPlayer("testfiles/VictorOrchestra-BlackWhiteRagtime.wav", loop=True)

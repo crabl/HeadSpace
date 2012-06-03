@@ -8,7 +8,7 @@ s.start()
 ui = HeadSpaceUI("Test")
 
 song = SfPlayer("testfiles/carelesswhisper.wav", loop=True)
-song_hs = HeadSpace(song, 30, 40)
+song_hs = HeadSpace(song, 30, 40).out()
 
 ui.add("Song", song_hs)
 ui.show()

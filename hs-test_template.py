@@ -9,7 +9,7 @@ s.start()
 ui = HeadSpaceUI("Test")
 
 voiceWav = SfPlayer("testfiles/voice.wav")
-voice = HeadSpace(voiceWav, 30, -20)
+voice = HeadSpace(voiceWav, 30, -20).out()
 ui.add("Voice", voice)
 
 ui.show()
