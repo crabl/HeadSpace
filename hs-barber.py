@@ -17,12 +17,13 @@ shaver = HeadSpace(shaverWav, 0, 0).out()
 shaver.ctrl(title="Shaver")
 
 backgroundWav = SfPlayer("testfiles/VictorOrchestra-BlackWhiteRagtime.wav", loop=True)
-background = HeadSpace(backgroundWav, 100, 30)
+background = HeadSpace(backgroundWav, 100, 30).out()
 
 dooropenWav = SfPlayer("testfiles/dooropen.wav", loop=True)
-dooropen = HeadSpace(dooropenWav, -20, -10)
+dooropen = HeadSpace(dooropenWav, -20, -10).out()
 
 phoneringWav = SfPlayer("testfiles/phonering.wav", loop=True)
-phonering = HeadSpace(phoneringWav, -150, -20)
+phonering = HeadSpace(phoneringWav, -150, -20).out()
+phonering.ctrl(title="Phone Ring")
 
 s.gui(locals())

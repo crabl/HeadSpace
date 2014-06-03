@@ -126,12 +126,6 @@ class HeadSpace(PyoObject):
                                    for i, obj in enumerate(self._base_objs)]    
         return PyoObject.out(self, chnl, inc, dur, delay)
 
-    def ctrl(self, map_list=None, title=None, wxnoserver=False):
-        self._map_list = [SLMap(-180, 180, "lin", "Azimuth", self._azimuth),
-                      SLMap(-40, 90, "lin", "Elevation", self._elevation),
-                      SLMapMul(self._mul)]
-        PyoObject.ctrl(self, map_list, title, wxnoserver)
-
     def __dir__(self):
         return ["input", "azimuth", "elevation", "mul", "add"]
     
@@ -187,7 +181,7 @@ class HeadSpace(PyoObject):
         Azimuth of the input signal relative to the listener.
         
         """
-        
+
         self._azimuth = int(x)
         self.swapImpulse()
     
@@ -220,6 +214,12 @@ class HeadSpace(PyoObject):
     def elevation(self): return self._elevation
     @elevation.setter
     def elevation(self, x): self.setElevation(x)
+
+    def ctrl(self, map_list=None, title=None, wxnoserver=False):
+        self._map_list = [SLMap(-180., 180., "lin", "azimuth", self.azimuth, dataOnly=True),
+                      SLMap(-40., 90., "lin", "elevation", self.elevation, dataOnly=True),
+                      SLMapMul(self._mul)]
+        PyoObject.ctrl(self, map_list, title, wxnoserver)
 
 class HeadSpaceUI:
     def __init__(self, windowTitle):
