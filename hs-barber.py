@@ -12,19 +12,18 @@ from headspace import *
 s = Server().boot()
 s.start()
 
-ui = HeadSpaceUI("Barbershop")
-
 shaverWav = SfPlayer("testfiles/shaver.wav", loop=True)
 shaver = HeadSpace(shaverWav, 0, 0).out()
-ui.add("Shaver", shaver)
+shaver.ctrl(title="Shaver")
 
 backgroundWav = SfPlayer("testfiles/VictorOrchestra-BlackWhiteRagtime.wav", loop=True)
-background = HeadSpace(backgroundWav, 100, 30)
+background = HeadSpace(backgroundWav, 100, 30).out()
 
 dooropenWav = SfPlayer("testfiles/dooropen.wav", loop=True)
-dooropen = HeadSpace(dooropenWav, -20, -10)
+dooropen = HeadSpace(dooropenWav, -20, -10).out()
 
 phoneringWav = SfPlayer("testfiles/phonering.wav", loop=True)
-phonering = HeadSpace(phoneringWav, -150, -20)
+phonering = HeadSpace(phoneringWav, -150, -20).out()
+phonering.ctrl(title="Phone Ring")
 
-ui.show()
+s.gui(locals())

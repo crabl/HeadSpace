@@ -10,7 +10,7 @@ sound placement.
 # Modified: May 15, 2012
 
 import glob
-import Tkinter
+#import Tkinter
 from pyo import *
 from hsdata import *
 
@@ -63,6 +63,7 @@ class HeadSpace(PyoObject):
         return ["input", "azimuth", "elevation", "mul", "add"]
     
     def __init__(self, input, azimuth=0, elevation=0, mul=1, add=0):
+        PyoObject.__init__(self)
         self._input = input
         self._azimuth = azimuth
         self._elevation = elevation
@@ -101,12 +102,12 @@ class HeadSpace(PyoObject):
         self._base_objs = [obj.play(wrap(dur, i), wrap(delay, i)) 
                            for i, obj in enumerate(self._base_objs)]
         
-        return self
+        return PyoObject.play(self, dur, delay)
     
     def stop(self):
         [obj.stop() for obj in self._outs]
         [obj.stop() for obj in self._base_objs]
-        return self
+        return PyoObject.stop(self)
     
     def out(self, chnl=0, inc=1, dur=0, delay=0):
         dur, delay, lmax = convertArgsToLists(dur, delay)
@@ -123,7 +124,10 @@ class HeadSpace(PyoObject):
             else:
                 self._base_objs = [obj.out(chnl=(chnl+i*inc), dur=(wrap(dur,i)), delay=(wrap(delay,i))) 
                                    for i, obj in enumerate(self._base_objs)]    
-        return self
+        return PyoObject.out(self, chnl, inc, dur, delay)
+
+    def __dir__(self):
+        return ["input", "azimuth", "elevation", "mul", "add"]
     
     def getImpulses(self):
         el = int(round(float(self._elevation), -1)) # round the elevation to the nearest 10
@@ -143,8 +147,8 @@ class HeadSpace(PyoObject):
         
         if(azNeg):
             return wavRight, wavLeft # Mirror impulses
-        else:
-            return wavLeft, wavRight
+        
+        return wavLeft, wavRight
     
     def swapImpulse(self):
         leftImp, rightImp = self.getImpulses()
@@ -177,7 +181,7 @@ class HeadSpace(PyoObject):
         Azimuth of the input signal relative to the listener.
         
         """
-        
+
         self._azimuth = int(x)
         self.swapImpulse()
     
@@ -210,6 +214,12 @@ class HeadSpace(PyoObject):
     def elevation(self): return self._elevation
     @elevation.setter
     def elevation(self, x): self.setElevation(x)
+
+    def ctrl(self, map_list=None, title=None, wxnoserver=False):
+        self._map_list = [SLMap(-180., 180., "lin", "azimuth", self.azimuth, dataOnly=True),
+                      SLMap(-40., 90., "lin", "elevation", self.elevation, dataOnly=True),
+                      SLMapMul(self._mul)]
+        PyoObject.ctrl(self, map_list, title, wxnoserver)
 
 class HeadSpaceUI:
     def __init__(self, windowTitle):
