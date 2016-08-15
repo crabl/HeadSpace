@@ -13,7 +13,8 @@ from headspace import *
 
 s = Server().boot()
 s.start()
-signal = SfPlayer("testfiles/voice.wav", loop=True)
+# signal = SfPlayer("testfiles/voice.wav", loop=True)
+signal = Sine(440)
 hsInstance = HeadSpace(signal, 0, 0).out()
 
 root = Tkinter.Tk()
